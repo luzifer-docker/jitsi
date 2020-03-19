@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euxo pipefail
+
+DAEMON=/usr/bin/prosody
+PIDPATH=/run/prosody
+PIDFILE="$PIDPATH"/prosody.pid
+USER=prosody
+
+mkdir -p "$(dirname $PIDFILE)"
+chown prosody:adm "$(dirname $PIDFILE)"
+
+exec /usr/local/bin/gosu prosody /usr/bin/prosody
