@@ -40,3 +40,15 @@ update-ca-certificates -f
 
 # Generate user for admin
 prosodyctl register focus "auth.${JITSI_DOMAIN}" "${JITSI_ADMIN_SECRET}"
+
+# Overwrite UI files from mount
+[ -d /ui/files ] && rsync -rv /ui/files/ /usr/share/jitsi-meet/
+[ -d /ui/patches ] && {
+	pushd /usr/share/jitsi-meet
+
+	for patch_file in /ui/patches/*.patch; do
+		patch -b -i "${patch_file}" -p0
+	done
+
+	popd
+}

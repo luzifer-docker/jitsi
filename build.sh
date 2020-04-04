@@ -8,6 +8,8 @@ packages_build=(
 
 packages_install=(
 	jitsi-meet
+	patch
+	rsync
 )
 
 no_postinst_pkgs=(
