@@ -36,3 +36,22 @@ server {
   }
 }
 ```
+
+## Apply UI modifications
+
+This container has a mechanism included to patch the installation inside the container on startup. There are two ways to modify those files: Patch them or overwrite them. Those modifications are needed to be mounted to the `/ui` mount-point of the container on startup.
+
+This is my folder structure:
+
+```
+/ui
+  +- files
+      +- custom.head.html
+      +- logo.png
+  +- patches
+      +- 01_index_html.patch
+      +- 02_interface_config_js.patch
+```
+
+- The content of the `/ui/files` folder is copied over the `/usr/share/jitsi-meet` folder with `rsync` command so will replace the whole file being present there
+- The patches in `/ui/patches` are executed inside the `/usr/share/jitsi-meet` folder using `patch` command so will modify the contents of the files
