@@ -12,6 +12,17 @@ var config = {
   enableNoAudioDetection: true,
   enableNoisyMicDetection: true,
 
+  // Video: Allow cams with more than 720p
+  constraints: {
+    video: {
+      height: {
+        ideal: 720,
+        max: 1080,
+        min: 240
+      }
+    }
+  },
+
   // Misc
   channelLastN: 10,
 
