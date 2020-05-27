@@ -1,6 +1,11 @@
 #!/usr/bin/with-contenv /bin/bash
 set -euxo pipefail
 
+[ -e /etc/jitsi/.configured ] && {
+	echo "Configuration was already applied, not re-applying"
+	exit 0
+}
+
 cfg_file_path="/usr/local/share/jitsi-config"
 
 [ -n "${JITSI_DOMAIN:-}" ] || {
@@ -52,3 +57,8 @@ prosodyctl register focus "auth.${JITSI_DOMAIN}" "${JITSI_ADMIN_SECRET}"
 
 	popd
 }
+
+# Mark container as initialized not to overwrite config
+# which would break the container as passwords would be
+# re-issued
+touch /etc/jitsi/.configured
