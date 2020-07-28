@@ -4,6 +4,7 @@ set -euxo pipefail
 [ -f /etc/jitsi-env.conf ] && source /etc/jitsi-env.conf
 
 exec /usr/local/bin/gosu jvb /usr/share/jitsi-videobridge/jvb.sh \
+	--apis=rest \
 	--host=$JVB_HOST \
 	--domain=$JVB_HOSTNAME \
 	--port=$JVB_PORT \
